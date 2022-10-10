@@ -7,35 +7,46 @@ use Illuminate\Http\Request;
 
 class MainController extends Controller{
 
-    public function home() {
-        $reviews = Contact::all();
-        return view('home', ['reviews'=>$reviews]);
+    public function index(){
+        $allcontacts = Contact::all();
+        return view('reviews.index', ['mycontacts' => $allcontacts]);
     }
 
-    public function about() {
-        return view('about');
+    public function create(){
+        return view('reviews.create');
     }
 
-    public function review() {
-       $reviews = new Contact();
-        return view('review',['reviews'=>$reviews->all()]);
+    public function store(Request $request){
+        Contact::create([
+            'email' => $request->email,
+            'subject' =>$request->subject,
+            'message' => $request->message
+        ]);
+
+        return redirect()->route('reviews.index');
     }
 
-    public function review_check(Request $request) {
-    $valid = $request->validate([
-        'email' => 'required|min:4|max:100',
-        'subject' => 'required|min:4|max:100',
-        'message' => 'required|min:15|max:500'
-    ]);
+    public function show(Contact $review){
+        return view('reviews.show', ['contact' => $review]);
+    }
 
-    $review = new Contact();
-    $review->email = $request->input('email');
-    $review->subject = $request->input('subject');
-    $review->message = $request->input('message');
+    public function edit(Contact $review){
+        return view('reviews.edit', ['contact' => $review]);
+    }
 
-    $review->save();
+    public function update(Request $request, Contact $review){
+        $review->update([
+            'email' => $request->email,
+            'subject' =>$request->subject,
+            'message' => $request->message
+        ]);
 
-    return redirect()->route('review');
+        return redirect()->route('reviews.index');
+    }
 
+    public function destroy(Contact $review){
+        $review->delete();
+
+        return redirect()->route('reviews.index');
     }
 }

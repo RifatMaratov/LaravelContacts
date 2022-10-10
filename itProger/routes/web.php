@@ -15,9 +15,12 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Route::get('/', [MainController::class, 'home']);
+Route::get('/', function () {
+    return redirect()->route('reviews.index');
+});
 
-Route::resources('reviews', MainController::class);
+Route::resources(['reviews' => MainController::class]);
+
 
 //Route::get('/about',[MainController::class, 'about']);
 //Route::get('/review',[MainController::class, 'review'])->name('review');
