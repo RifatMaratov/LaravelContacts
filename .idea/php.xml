@@ -108,6 +108,7 @@
       <path value="$PROJECT_DIR$/itProger/vendor/voku/portable-ascii" />
       <path value="$PROJECT_DIR$/itProger/vendor/brick/math" />
       <path value="$PROJECT_DIR$/itProger/vendor/nette/schema" />
+      <path value="$PROJECT_DIR$/itProger/vendor/laravel/ui" />
     </include_path>
   </component>
   <component name="PhpProjectSharedConfiguration" php_language_level="8.0" />

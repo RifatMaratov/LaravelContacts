@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\MainController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,7 +20,19 @@ Route::get('/', function () {
     return redirect()->route('reviews.index');
 });
 
+Route::get('/about',[MainController::class, 'review'])->name('reviews.about');
+
 Route::resources(['reviews' => MainController::class]);
+
+Route::group(['prefix' => 'auth'], function () {
+    Route::get('register', [AuthController::class, 'register'])->name('register');
+    Route::get('login', [AuthController::class, 'auth'])->name('auth');
+    Route::post('user/create', [AuthController::class, 'create'])->name('user.create');
+    Route::post('signin', [AuthController::class, 'login'])->name('login');
+    Route::get('logout', [AuthController::class, 'logout'])->name('logout');
+
+});
+
 
 
 //Route::get('/about',[MainController::class, 'about']);

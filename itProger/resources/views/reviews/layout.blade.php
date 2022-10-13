@@ -17,8 +17,18 @@
 
     <nav class="d-inline-flex mt-2 mt-md-0 ms-md-auto">
         <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('reviews.index')}}">Главная</a>
-        <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('reviews.index')}}">Про нас</a>
-
+        <a class="me-3 py-2 text-dark text-decoration-none" href="{{route('reviews.about')}}">Про нас</a>
+        @guest()
+            <a class="me-3 py-2 text-dark text-decoration-none" href="{{ route('register') }}">Register</a>
+            <a class="me-3 py-2 text-dark text-decoration-none"" href="{{ route('auth') }}">Log In</a>
+        @endguest
+        @auth()
+            <a class="me-3 py-2 text-dark text-decoration-none"><?php echo Auth::user()->email ?></a>
+            <a class="me-3 py-2 text-dark text-decoration-none" href="{{ route('logout') }}">Log Out</a>
+            <p style="color: white;
+            font-size: 15px; text-decoration: none; padding-left: 20px;">
+            </p>
+        @endauth
     </nav>
     <a class="btn btn-warning" href="{{route('reviews.create')}}">Отзывы</a>
 </div>

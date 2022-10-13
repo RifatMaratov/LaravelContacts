@@ -16,6 +16,10 @@ class MainController extends Controller{
         return view('reviews.create');
     }
 
+    public function review(){
+        return view('reviews.about');
+    }
+
     public function store(Request $request){
         Contact::create([
             'email' => $request->email,
