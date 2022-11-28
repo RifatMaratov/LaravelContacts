@@ -20,3 +20,7 @@ use App\Http\Controllers\API\ItprogerController;
 //});
 
 Route::apiResource('/reviews', ItprogerController::class, array("as" => "api"));
+
+Route::post('register', [\App\Http\Controllers\api\authcontroller::class, 'register']);
+Route::get('emps', [\App\Http\Controllers\api\employeecontroller::class, 'index'])->middleware('auth:api');
+Route::post('/login', [\App\Http\Controllers\api\authcontroller::class, 'login']);

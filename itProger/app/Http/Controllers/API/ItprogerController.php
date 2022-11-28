@@ -22,7 +22,8 @@ class ItprogerController extends Controller
 
    public function index()
    {
-       return Contact::all();
+       $contacts = Contact::all();
+       return contactresource::collection($contacts);
    }
 
    public function store(contactstorerequest $request)
